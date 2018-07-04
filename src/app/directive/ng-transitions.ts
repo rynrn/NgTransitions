@@ -1,9 +1,9 @@
 import { Directive, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
 
 @Directive({
-  selector: '[appInOutTransition]'
+  selector: '[NgTransition]'
 })
-export class InOutTransitionDirective implements OnInit, OnDestroy {
+export class NgTransitionsDirective implements OnInit, OnDestroy {
     @Input() index: number;
     @Input() inAnimationName: string;
     @Input() outAnimationName: string;
