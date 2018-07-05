@@ -4,59 +4,79 @@ import { Directive, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
   selector: '[NgTransition]'
 })
 export class NgTransitionsDirective implements OnInit, OnDestroy {
-    @Input() index: number;
-    @Input() inAnimationName: string;
-    @Input() outAnimationName: string;
-    @Input() inAnimationDelay: number;
-    @Input() outAnimationDelay: number;
-    @Input() inDuration: number;
-    @Input() outDuration: number;
+    @Input() NgTransition: any;
+    @Input() indexPositionInList: number;
 
-    private parent:  HTMLElement;
+    private parent: HTMLElement;
+    private enterAnimationName: string;
+    private leavAnimationName: string;
+    private enterAnimationDelay: number;
+    private leavAnimationDelay: number;
+    private enterDuration: number;
+    private leavDuration: number;
+    private appendTo: string | HTMLElement;
+
     constructor(public el: ElementRef) {
-      this.inAnimationName = 'fadeIn';
-      this.outAnimationName = 'fadeOut';
-      this.inAnimationDelay = 0;
-      this.outAnimationDelay = 0;
-      this.inDuration = 500;
-      this.outDuration = 500;
+      this.parent = null;
+      this.enterAnimationName = null;
+      this.leavAnimationName = null;
+      this.enterAnimationDelay = null;
+      this.leavAnimationDelay = null;
+      this.enterDuration = null;
+      this.leavDuration = null;
+      this.indexPositionInList = null;
+      this.appendTo = null;
     }
 
      ngOnInit(): void {
+       Object.assign(this, this.NgTransition);
+       this.setParent();
+
        this.parent = this.el.nativeElement.parentElement;
-        if (this.inAnimationName) {
-            this.el.nativeElement.style.animationName = this.inAnimationName;
+        if (this.enterAnimationName) {
+            this.el.nativeElement.style.animationName = this.enterAnimationName;
         }
-        this.el.nativeElement.style.animationDuration = `${this.inDuration}ms`;
-        this.el.nativeElement.style.animationDelay = `${this.inAnimationDelay}ms`;
+        this.el.nativeElement.style.animationDuration = `${this.enterDuration}ms`;
+        this.el.nativeElement.style.animationDelay = `${this.enterAnimationDelay}ms`;
         this.el.nativeElement.style.animationPlayState = 'running';
      }
 
      ngOnDestroy(): void {
-        this.appendChild();
+        const el = this.el.nativeElement.cloneNode(true);
+        this.reTouchedToDOMOnDestroy(el);
 
-        if (this.outAnimationName) {
-            this.el.nativeElement.style.animationName = this.outAnimationName;
+        if (this.leavAnimationName) {
+          el.style.animationName = this.leavAnimationName;
         }
 
-        this.el.nativeElement.style.animationDuration = `${this.outDuration}ms`;
-        this.el.nativeElement.style.animationDelay = `${this.outAnimationDelay}ms`;
-        this.el.nativeElement.style.animationPlayState = 'running';
+        el.style.animationDuration = `${this.leavDuration}ms`;
+        el.style.animationDelay = `${this.leavAnimationDelay}ms`;
+        el.style.animationPlayState = 'running';
 
-        this.removeFromDom();
+        this.removeFromDom(el);
     }
 
-    private appendChild(): void {
-      if (this.parent.children.length === 0) {
-        this.parent.appendChild(this.el.nativeElement);
+    private reTouchedToDOMOnDestroy(el: HTMLElement): void {
+      if (this.indexPositionInList !== null) {
+        this.parent.insertBefore(el, this.parent.children[this.indexPositionInList]);
       } else {
-        this.parent.insertBefore(this.el.nativeElement, this.parent.children[this.index]);
+        this.parent.appendChild(el);
       }
     }
 
-    private removeFromDom(): void {
+    private removeFromDom(el: HTMLElement): void {
       setTimeout(() => {
-        this.parent.removeChild(this.el.nativeElement);
-      }, this.outDuration - 60);
+        this.parent.removeChild(el);
+      }, this.leavDuration - 60);
+    }
+
+    private setParent(): void {
+      if (typeof this.appendTo === 'string') {
+        this.parent = document.querySelector(this.appendTo);
+      } else if (this.appendTo instanceof HTMLElement) {
+        this.parent = this.appendTo;
+      } else {
+        this.parent = document.body;
+      }
     }
 }
