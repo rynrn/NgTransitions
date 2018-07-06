@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { NgTransitionsDirective } from '../directive/ng-transitions';
+import { NgTransitionsDirective } from '../../src/ng-transitions/ng-transitions';
 
 @NgModule({
   declarations: [

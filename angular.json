@@ -3,35 +3,40 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "in-out-transitions": {
+        "ng-transitions": {
             "root": "",
-            "sourceRoot": "src",
+            "sourceRoot": "demo",
             "projectType": "application",
             "prefix": "Ng",
-            "schematics": {},
+            "schematics": {
+              "@schematics/angular:component": {
+                "changeDetection": "OnPush",
+                "export": true
+              }
+            },
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/in-out-transitions",
-                        "index": "src/index.html",
-                        "main": "src/main.ts",
-                        "polyfills": "src/polyfills.ts",
-                        "tsConfig": "src/tsconfig.app.json",
+                        "outputPath": "dist/ng-transitions",
+                        "index": "demo/index.html",
+                        "main": "demo/main.ts",
+                        "polyfills": "demo/polyfills.ts",
+                        "tsConfig": "demo/tsconfig.app.json",
                         "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
+                            "demo/favicon.ico",
+                            "demo/assets"
                         ],
                         "styles": [
-                            "src/styles.css"
+                            "demo/styles.css"
                         ],
                         "scripts": []
                     },
                     "configurations": {
                         "production": {
                             "fileReplacements": [{
-                                "replace": "src/environments/environment.ts",
-                                "with": "src/environments/environment.prod.ts"
+                                "replace": "demo/environments/environment.ts",
+                                "with": "demo/environments/environment.prod.ts"
                             }],
                             "optimization": true,
                             "outputHashing": "all",
@@ -48,34 +53,34 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "in-out-transitions:build"
+                        "browserTarget": "ng-transitions:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "in-out-transitions:build:production"
+                            "browserTarget": "ng-transitions:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "in-out-transitions:build"
+                        "browserTarget": "ng-transitions:build"
                     }
                 },
                 "test": {
                     "builder": "@angular-devkit/build-angular:karma",
                     "options": {
-                        "main": "src/test.ts",
-                        "polyfills": "src/polyfills.ts",
-                        "tsConfig": "src/tsconfig.spec.json",
-                        "karmaConfig": "src/karma.conf.js",
+                        "main": "demo/test.ts",
+                        "polyfills": "demo/polyfills.ts",
+                        "tsConfig": "demo/tsconfig.spec.json",
+                        "karmaConfig": "demo/karma.conf.js",
                         "styles": [
-                            "src/styles.css"
+                            "demo/styles.css"
                         ],
                         "scripts": [],
                         "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
+                            "demo/favicon.ico",
+                            "demo/assets"
                         ]
                     }
                 },
@@ -83,8 +88,8 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
-                            "src/tsconfig.app.json",
-                            "src/tsconfig.spec.json"
+                            "demo/tsconfig.app.json",
+                            "demo/tsconfig.spec.json"
                         ],
                         "exclude": [
                             "**/node_modules/**"
@@ -93,7 +98,7 @@
                 }
             }
         },
-        "in-out-transitions-e2e": {
+        "ng-transitions-e2e": {
             "root": "e2e/",
             "projectType": "application",
             "architect": {
@@ -101,11 +106,11 @@
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
                         "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "in-out-transitions:serve"
+                        "devServerTarget": "ng-transitions:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "in-out-transitions:serve:production"
+                            "devServerTarget": "ng-transitions:serve:production"
                         }
                     }
                 },
@@ -121,5 +126,5 @@
             }
         }
     },
-    "defaultProject": "in-out-transitions"
+    "defaultProject": "ng-transitions"
 }

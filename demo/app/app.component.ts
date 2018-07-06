@@ -93,6 +93,6 @@ export class AppComponent {
   }
 
   removeItem(item: any): void {
-    this.items = this.items.filter(itm => itm !== item);
+    this.items = this.items.filter((itm: any) => itm !== item);
   }
 }

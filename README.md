@@ -67,7 +67,3 @@ this.options = {
 2. `cd NgTransitions`
 3. `npm start`
 4. Navigate to http://localhost:4200
-
-
-#### Trableshooting
-1. `is missing from the TypeScript compilation. Please make sure it is in your tsconfig via the 'files' or 'include' propert` - add `"include": ["node_modules/ng-transitions"]` to **tsconfig.app.json**
