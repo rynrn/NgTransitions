@@ -2,15 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { NgTransitionsModule } from './directive/ng-transitions.module';
+import { NgTransitionsDirective } from '../directive/ng-transitions';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NgTransitionsDirective
   ],
   imports: [
-    BrowserModule,
-    NgTransitionsModule
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]

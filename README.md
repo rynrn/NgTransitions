@@ -10,6 +10,24 @@ make the life easier to add transitions when you add or remove element from DOM.
 #### Animations
 **IMPORTANT** the directive useing animation name that you need to add, you can use **[animate.css](https://daneden.github.io/animate.css)** or any css animation.
 
+#### Add directive to appication
+```
+import { NgTransitionsDirective } from 'ng-transitions';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    NgTransitionsDirective
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
 #### List of items - transition is done when adding and removing items from list
 ```
 this.options = {
@@ -49,3 +67,7 @@ this.options = {
 2. `cd NgTransitions`
 3. `npm start`
 4. Navigate to http://localhost:4200
+
+
+#### Trableshooting
+1. `is missing from the TypeScript compilation. Please make sure it is in your tsconfig via the 'files' or 'include' propert` - add `"include": ["node_modules/ng-transitions"]` to **tsconfig.app.json**

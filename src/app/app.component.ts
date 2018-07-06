@@ -80,7 +80,7 @@ export class AppComponent {
     };
   }
 
-  addItem(item: any): void {
+  addItem(): void {
     this.items = [...this.items].concat({name: window.prompt('add item')});
   }
 
