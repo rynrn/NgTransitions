@@ -1,9 +1,9 @@
 {
   "name": "ng-transitions",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "scripts": {
     "ng": "ng",
-    "library:bundle": "tsc && rm -rf bundles && node library.builder.js",
+    "bundle": "tsc && rm -rf bundles && node builder.js",
     "start": "ng serve",
     "build": "ng build --aot --prod",
     "test": "ng test",

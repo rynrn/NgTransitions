@@ -1,6 +1,6 @@
 var path = require('path');
 var Builder = require('systemjs-builder');
-var bundleName = name = "ng-transitions";
+var bundleName = name = "src/ng-transitions/ng-transitions";
 
 var builder = new Builder();
 var config = {

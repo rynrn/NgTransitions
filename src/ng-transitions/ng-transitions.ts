@@ -7,14 +7,14 @@ export class NgTransitionsDirective implements OnInit, OnDestroy {
     @Input() NgTransition: any;
     @Input() indexPositionInList: number;
 
-    private parent: HTMLElement;
+    private parent: any;
     private enterAnimationName: string;
     private leavAnimationName: string;
     private enterAnimationDelay: number;
     private leavAnimationDelay: number;
     private enterDuration: number;
     private leavDuration: number;
-    private appendTo: string | HTMLElement;
+    private appendTo: any;
 
     constructor(public el: ElementRef) {
       this.parent = null;
@@ -29,7 +29,7 @@ export class NgTransitionsDirective implements OnInit, OnDestroy {
     }
 
      ngOnInit(): void {
-       Object.assign(this, this.NgTransition);
+      (<any>Object).assign(this, this.NgTransition);
        this.setParent();
 
        this.parent = this.el.nativeElement.parentElement;

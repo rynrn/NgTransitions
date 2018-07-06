@@ -8,6 +8,8 @@
       "es2015",
       "dom"
     ],
+    "outDir": "./dist",
+    "strict": false,
     "noImplicitAny": true,
     "declaration": true,
     "inlineSources": false,
