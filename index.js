@@ -5,12 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var core_1 = require("@angular/core");
-var NgTransitionsDirective = (function () {
+var NgTransitionsDirective = /** @class */ (function () {
     function NgTransitionsDirective(el) {
         this.el = el;
         this.parent = null;
@@ -23,29 +20,41 @@ var NgTransitionsDirective = (function () {
         this.indexPositionInList = null;
         this.appendTo = null;
     }
+    NgTransitionsDirective.prototype.setOptions = function () {
+        this.enterAnimationName = this.NgTransition.enterAnimationName;
+        this.leavAnimationName = this.NgTransition.leavAnimationName;
+        this.enterAnimationDelay = this.NgTransition.enterAnimationDelay;
+        this.leavAnimationDelay = this.NgTransition.leavAnimationDelay;
+        this.enterDuration = this.NgTransition.enterDuration;
+        this.leavDuration = this.NgTransition.leavDuration;
+        this.appendTo = this.NgTransition.appendTo;
+    };
     NgTransitionsDirective.prototype.ngOnInit = function () {
-        Object.assign(this, this.NgTransition);
+        this.setOptions();
         this.setParent();
-        this.parent = this.el.nativeElement.parentElement;
         if (this.enterAnimationName) {
             this.el.nativeElement.style.animationName = this.enterAnimationName;
+            this.el.nativeElement.style.animationDuration = this.enterDuration + "ms";
+            this.el.nativeElement.style.animationDelay = this.enterAnimationDelay + "ms";
+            this.el.nativeElement.style.animationPlayState = 'running';
         }
-        this.el.nativeElement.style.animationDuration = this.enterDuration + "ms";
-        this.el.nativeElement.style.animationDelay = this.enterAnimationDelay + "ms";
-        this.el.nativeElement.style.animationPlayState = 'running';
     };
     NgTransitionsDirective.prototype.ngOnDestroy = function () {
+        if (!this.el.nativeElement || !this.leavAnimationName) {
+            return;
+        }
         var el = this.el.nativeElement.cloneNode(true);
         this.reTouchedToDOMOnDestroy(el);
-        if (this.leavAnimationName) {
-            el.style.animationName = this.leavAnimationName;
-        }
+        el.style.animationName = this.leavAnimationName;
         el.style.animationDuration = this.leavDuration + "ms";
         el.style.animationDelay = this.leavAnimationDelay + "ms";
         el.style.animationPlayState = 'running';
         this.removeFromDom(el);
     };
     NgTransitionsDirective.prototype.reTouchedToDOMOnDestroy = function (el) {
+        if (!el) {
+            return;
+        }
         if (this.indexPositionInList !== null) {
             this.parent.insertBefore(el, this.parent.children[this.indexPositionInList]);
         }
@@ -56,6 +65,9 @@ var NgTransitionsDirective = (function () {
     NgTransitionsDirective.prototype.removeFromDom = function (el) {
         var _this = this;
         setTimeout(function () {
+            if (!_this.parent || !el) {
+                return;
+            }
             _this.parent.removeChild(el);
         }, this.leavDuration - 60);
     };
@@ -67,22 +79,19 @@ var NgTransitionsDirective = (function () {
             this.parent = this.appendTo;
         }
         else {
-            this.parent = document.body;
+            this.parent = this.el.nativeElement.parentElement;
         }
     };
     __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], NgTransitionsDirective.prototype, "NgTransition", void 0);
+        core_1.Input()
+    ], NgTransitionsDirective.prototype, "NgTransition");
     __decorate([
-        core_1.Input(),
-        __metadata("design:type", Number)
-    ], NgTransitionsDirective.prototype, "indexPositionInList", void 0);
+        core_1.Input()
+    ], NgTransitionsDirective.prototype, "indexPositionInList");
     NgTransitionsDirective = __decorate([
         core_1.Directive({
             selector: '[NgTransition]'
-        }),
-        __metadata("design:paramtypes", [core_1.ElementRef])
+        })
     ], NgTransitionsDirective);
     return NgTransitionsDirective;
 }());

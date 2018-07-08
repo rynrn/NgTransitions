@@ -28,27 +28,36 @@ export class NgTransitionsDirective implements OnInit, OnDestroy {
       this.appendTo = null;
     }
 
+    setOptions(): void {
+      this.enterAnimationName = this.NgTransition.enterAnimationName;
+      this.leavAnimationName = this.NgTransition.leavAnimationName;
+      this.enterAnimationDelay = this.NgTransition.enterAnimationDelay;
+      this.leavAnimationDelay = this.NgTransition.leavAnimationDelay;
+      this.enterDuration = this.NgTransition.enterDuration;
+      this.leavDuration = this.NgTransition.leavDuration;
+      this.appendTo = this.NgTransition.appendTo;
+    }
+
      ngOnInit(): void {
-      (<any>Object).assign(this, this.NgTransition);
+       this.setOptions();
        this.setParent();
 
-       this.parent = this.el.nativeElement.parentElement;
         if (this.enterAnimationName) {
             this.el.nativeElement.style.animationName = this.enterAnimationName;
+            this.el.nativeElement.style.animationDuration = `${this.enterDuration}ms`;
+            this.el.nativeElement.style.animationDelay = `${this.enterAnimationDelay}ms`;
+            this.el.nativeElement.style.animationPlayState = 'running';
         }
-        this.el.nativeElement.style.animationDuration = `${this.enterDuration}ms`;
-        this.el.nativeElement.style.animationDelay = `${this.enterAnimationDelay}ms`;
-        this.el.nativeElement.style.animationPlayState = 'running';
      }
 
      ngOnDestroy(): void {
+        if (!this.el.nativeElement || !this.leavAnimationName) {
+          return;
+        }
         const el = this.el.nativeElement.cloneNode(true);
         this.reTouchedToDOMOnDestroy(el);
 
-        if (this.leavAnimationName) {
-          el.style.animationName = this.leavAnimationName;
-        }
-
+        el.style.animationName = this.leavAnimationName;
         el.style.animationDuration = `${this.leavDuration}ms`;
         el.style.animationDelay = `${this.leavAnimationDelay}ms`;
         el.style.animationPlayState = 'running';
@@ -57,6 +66,9 @@ export class NgTransitionsDirective implements OnInit, OnDestroy {
     }
 
     private reTouchedToDOMOnDestroy(el: HTMLElement): void {
+      if (!el) {
+        return;
+      }
       if (this.indexPositionInList !== null) {
         this.parent.insertBefore(el, this.parent.children[this.indexPositionInList]);
       } else {
@@ -66,6 +78,9 @@ export class NgTransitionsDirective implements OnInit, OnDestroy {
 
     private removeFromDom(el: HTMLElement): void {
       setTimeout(() => {
+        if (!this.parent || !el) {
+          return;
+        }
         this.parent.removeChild(el);
       }, this.leavDuration - 60);
     }
@@ -76,7 +91,7 @@ export class NgTransitionsDirective implements OnInit, OnDestroy {
       } else if (this.appendTo instanceof HTMLElement) {
         this.parent = this.appendTo;
       } else {
-        this.parent = document.body;
+        this.parent = this.el.nativeElement.parentElement;
       }
     }
 }

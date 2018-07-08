@@ -1,6 +1,6 @@
 {
   "name": "ng-transitions",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "scripts": {
     "bundle": "tsc && rm -rf bundles && node builder.js",
     "start": "ng serve",

@@ -20,29 +20,41 @@ var NgTransitionsDirective = /** @class */ (function () {
         this.indexPositionInList = null;
         this.appendTo = null;
     }
+    NgTransitionsDirective.prototype.setOptions = function () {
+        this.enterAnimationName = this.NgTransition.enterAnimationName;
+        this.leavAnimationName = this.NgTransition.leavAnimationName;
+        this.enterAnimationDelay = this.NgTransition.enterAnimationDelay;
+        this.leavAnimationDelay = this.NgTransition.leavAnimationDelay;
+        this.enterDuration = this.NgTransition.enterDuration;
+        this.leavDuration = this.NgTransition.leavDuration;
+        this.appendTo = this.NgTransition.appendTo;
+    };
     NgTransitionsDirective.prototype.ngOnInit = function () {
-        Object.assign(this, this.NgTransition);
+        this.setOptions();
         this.setParent();
-        this.parent = this.el.nativeElement.parentElement;
         if (this.enterAnimationName) {
             this.el.nativeElement.style.animationName = this.enterAnimationName;
+            this.el.nativeElement.style.animationDuration = this.enterDuration + "ms";
+            this.el.nativeElement.style.animationDelay = this.enterAnimationDelay + "ms";
+            this.el.nativeElement.style.animationPlayState = 'running';
         }
-        this.el.nativeElement.style.animationDuration = this.enterDuration + "ms";
-        this.el.nativeElement.style.animationDelay = this.enterAnimationDelay + "ms";
-        this.el.nativeElement.style.animationPlayState = 'running';
     };
     NgTransitionsDirective.prototype.ngOnDestroy = function () {
+        if (!this.el.nativeElement || !this.leavAnimationName) {
+            return;
+        }
         var el = this.el.nativeElement.cloneNode(true);
         this.reTouchedToDOMOnDestroy(el);
-        if (this.leavAnimationName) {
-            el.style.animationName = this.leavAnimationName;
-        }
+        el.style.animationName = this.leavAnimationName;
         el.style.animationDuration = this.leavDuration + "ms";
         el.style.animationDelay = this.leavAnimationDelay + "ms";
         el.style.animationPlayState = 'running';
         this.removeFromDom(el);
     };
     NgTransitionsDirective.prototype.reTouchedToDOMOnDestroy = function (el) {
+        if (!el) {
+            return;
+        }
         if (this.indexPositionInList !== null) {
             this.parent.insertBefore(el, this.parent.children[this.indexPositionInList]);
         }
@@ -53,6 +65,9 @@ var NgTransitionsDirective = /** @class */ (function () {
     NgTransitionsDirective.prototype.removeFromDom = function (el) {
         var _this = this;
         setTimeout(function () {
+            if (!_this.parent || !el) {
+                return;
+            }
             _this.parent.removeChild(el);
         }, this.leavDuration - 60);
     };
@@ -64,7 +79,7 @@ var NgTransitionsDirective = /** @class */ (function () {
             this.parent = this.appendTo;
         }
         else {
-            this.parent = document.body;
+            this.parent = this.el.nativeElement.parentElement;
         }
     };
     __decorate([
