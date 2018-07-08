@@ -56,7 +56,7 @@ export class NgTransitionsDirective implements OnInit, OnDestroy {
     }
 
     private reTouchedToDOMOnDestroy(el: HTMLElement): void {
-      if (!el) {
+      if (!el || !this.parent) {
         return;
       }
       if (this.indexPositionInList !== null) {

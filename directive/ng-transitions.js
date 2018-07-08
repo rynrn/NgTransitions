@@ -46,7 +46,7 @@ var NgTransitionsDirective = (function () {
         this.removeFromDom(el);
     };
     NgTransitionsDirective.prototype.reTouchedToDOMOnDestroy = function (el) {
-        if (!el) {
+        if (!el || !this.parent) {
             return;
         }
         if (this.indexPositionInList !== null) {
