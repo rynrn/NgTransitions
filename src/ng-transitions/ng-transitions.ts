@@ -28,26 +28,16 @@ export class NgTransitionsDirective implements OnInit, OnDestroy {
       this.appendTo = null;
     }
 
-    setOptions(): void {
-      this.enterAnimationName = this.NgTransition.enterAnimationName;
-      this.leavAnimationName = this.NgTransition.leavAnimationName;
-      this.enterAnimationDelay = this.NgTransition.enterAnimationDelay;
-      this.leavAnimationDelay = this.NgTransition.leavAnimationDelay;
-      this.enterDuration = this.NgTransition.enterDuration;
-      this.leavDuration = this.NgTransition.leavDuration;
-      this.appendTo = this.NgTransition.appendTo;
-    }
-
      ngOnInit(): void {
-       this.setOptions();
-       this.setParent();
+      (<any>Object).assign(this, this.NgTransition);
+      this.setParent();
 
-        if (this.enterAnimationName) {
-            this.el.nativeElement.style.animationName = this.enterAnimationName;
-            this.el.nativeElement.style.animationDuration = `${this.enterDuration}ms`;
-            this.el.nativeElement.style.animationDelay = `${this.enterAnimationDelay}ms`;
-            this.el.nativeElement.style.animationPlayState = 'running';
-        }
+      if (this.enterAnimationName) {
+        this.el.nativeElement.style.animationName = this.enterAnimationName;
+        this.el.nativeElement.style.animationDuration = `${this.enterDuration}ms`;
+        this.el.nativeElement.style.animationDelay = `${this.enterAnimationDelay}ms`;
+        this.el.nativeElement.style.animationPlayState = 'running';
+      }
      }
 
      ngOnDestroy(): void {

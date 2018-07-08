@@ -8,7 +8,7 @@
       "es2015",
       "dom"
     ],
-    "outDir": "./dist",
+    "outDir": "./exports",
     "strict": false,
     "noImplicitAny": true,
     "declaration": true,
@@ -20,5 +20,6 @@
   },
   "typeRoots": [
     "./node_modules/@types"
-  ]
+  ],
+  "exclude": ["demo"]
 }
