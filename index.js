@@ -1,1 +1,1 @@
-export * from './exports/ng-transitions/ng-transitions';
+export * from './directive/ng-transitions/ng-transitions';

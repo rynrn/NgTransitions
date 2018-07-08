@@ -8,7 +8,7 @@
       "es2015",
       "dom"
     ],
-    "outDir": "./exports",
+    "outDir": "./directive",
     "strict": false,
     "noImplicitAny": true,
     "declaration": true,
