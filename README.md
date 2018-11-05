@@ -33,11 +33,11 @@ export class AppModule { }
 this.options = {
   appendTo: 'app-root',
   enterAnimationName: 'fadeIn',
-  leavAnimationName: 'fadeOut',
+  leaveAnimationName: 'fadeOut',
   enterDuration: 1000,
-  leavDuration: 1000,
+  leaveDuration: 1000,
   enterAnimationDelay: 0,
-  leavAnimationDelay: 0
+  leaveAnimationDelay: 0
 };
 
 <div [NgTransition]="optionsItems"
@@ -50,20 +50,14 @@ this.options = {
 this.options = {
   appendTo: 'app-root',
   enterAnimationName: 'fadeIn',
-  leavAnimationName: 'fadeOut',
+  leaveAnimationName: 'fadeOut',
   enterDuration: 1000,
-  leavDuration: 1000,
+  leaveDuration: 1000,
   enterAnimationDelay: 0,
-  leavAnimationDelay: 0
+  leaveAnimationDelay: 0
 };
 
 <div [NgTransition]="optionsItems"
      *ngFor="let item of items; let i = index;"
      [indexPositionInList]="i"></div>
 ```
-
-#### Demo
-1. `git clone https://github.com/rynrn/NgTransitions.git`
-2. `cd NgTransitions`
-3. `npm start`
-4. Navigate to http://localhost:4200

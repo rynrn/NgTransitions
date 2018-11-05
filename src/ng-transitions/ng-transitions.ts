@@ -9,21 +9,21 @@ export class NgTransitionsDirective implements OnInit, OnDestroy {
 
     private parent: any;
     private enterAnimationName: string;
-    private leavAnimationName: string;
+    private leaveAnimationName: string;
     private enterAnimationDelay: number;
-    private leavAnimationDelay: number;
+    private leaveAnimationDelay: number;
     private enterDuration: number;
-    private leavDuration: number;
+    private leaveDuration: number;
     private appendTo: any;
 
     constructor(public el: ElementRef) {
       this.parent = null;
       this.enterAnimationName = null;
-      this.leavAnimationName = null;
+      this.leaveAnimationName = null;
       this.enterAnimationDelay = null;
-      this.leavAnimationDelay = null;
+      this.leaveAnimationDelay = null;
       this.enterDuration = null;
-      this.leavDuration = null;
+      this.leaveDuration = null;
       this.indexPositionInList = null;
       this.appendTo = null;
     }
@@ -41,15 +41,15 @@ export class NgTransitionsDirective implements OnInit, OnDestroy {
      }
 
      ngOnDestroy(): void {
-        if (!this.el.nativeElement || !this.leavAnimationName) {
+        if (!this.el.nativeElement || !this.leaveAnimationName) {
           return;
         }
         const el = this.el.nativeElement.cloneNode(true);
         this.reTouchedToDOMOnDestroy(el);
 
-        el.style.animationName = this.leavAnimationName;
-        el.style.animationDuration = `${this.leavDuration}ms`;
-        el.style.animationDelay = `${this.leavAnimationDelay}ms`;
+        el.style.animationName = this.leaveAnimationName;
+        el.style.animationDuration = `${this.leaveDuration}ms`;
+        el.style.animationDelay = `${this.leaveAnimationDelay}ms`;
         el.style.animationPlayState = 'running';
 
         this.removeFromDom(el);
@@ -72,7 +72,7 @@ export class NgTransitionsDirective implements OnInit, OnDestroy {
           return;
         }
         this.parent.removeChild(el);
-      }, this.leavDuration - 60);
+      }, this.leaveDuration - 60);
     }
 
     private setParent(): void {
