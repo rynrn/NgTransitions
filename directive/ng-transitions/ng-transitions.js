@@ -15,12 +15,12 @@ var NgTransitionsDirective = (function () {
         this.el = el;
         this.parent = null;
         this.enterAnimationName = null;
-        this.leavAnimationName = null;
+        this.leaveAnimationName = null;
         this.enterAnimationDelay = null;
-        this.leavAnimationDelay = null;
+        this.leaveAnimationDelay = null;
         this.enterDuration = null;
-        this.leavDuration = null;
-        this.indexPositionInList = null;
+        this.leaveDuration = null;
+        this.transitionIndex = null;
         this.appendTo = null;
     }
     NgTransitionsDirective.prototype.ngOnInit = function () {
@@ -34,14 +34,14 @@ var NgTransitionsDirective = (function () {
         }
     };
     NgTransitionsDirective.prototype.ngOnDestroy = function () {
-        if (!this.el.nativeElement || !this.leavAnimationName) {
+        if (!this.el.nativeElement || !this.leaveAnimationName) {
             return;
         }
         var el = this.el.nativeElement.cloneNode(true);
         this.reTouchedToDOMOnDestroy(el);
-        el.style.animationName = this.leavAnimationName;
-        el.style.animationDuration = this.leavDuration + "ms";
-        el.style.animationDelay = this.leavAnimationDelay + "ms";
+        el.style.animationName = this.leaveAnimationName;
+        el.style.animationDuration = this.leaveDuration + "ms";
+        el.style.animationDelay = this.leaveAnimationDelay + "ms";
         el.style.animationPlayState = 'running';
         this.removeFromDom(el);
     };
@@ -49,8 +49,8 @@ var NgTransitionsDirective = (function () {
         if (!el || !this.parent) {
             return;
         }
-        if (this.indexPositionInList !== null) {
-            this.parent.insertBefore(el, this.parent.children[this.indexPositionInList]);
+        if (this.transitionIndex !== null) {
+            this.parent.insertBefore(el, this.parent.children[this.transitionIndex]);
         }
         else {
             this.parent.appendChild(el);
@@ -63,7 +63,7 @@ var NgTransitionsDirective = (function () {
                 return;
             }
             _this.parent.removeChild(el);
-        }, this.leavDuration - 60);
+        }, this.leaveDuration - 60);
     };
     NgTransitionsDirective.prototype.setParent = function () {
         if (typeof this.appendTo === 'string') {
@@ -83,7 +83,7 @@ var NgTransitionsDirective = (function () {
     __decorate([
         core_1.Input(),
         __metadata("design:type", Number)
-    ], NgTransitionsDirective.prototype, "indexPositionInList", void 0);
+    ], NgTransitionsDirective.prototype, "transitionIndex", void 0);
     NgTransitionsDirective = __decorate([
         core_1.Directive({
             selector: '[NgTransition]'

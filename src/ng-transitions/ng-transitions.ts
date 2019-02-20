@@ -5,7 +5,7 @@ import { Directive, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
 })
 export class NgTransitionsDirective implements OnInit, OnDestroy {
     @Input() NgTransition: any;
-    @Input() indexPositionInList: number;
+    @Input() transitionIndex: number;
 
     private parent: any;
     private enterAnimationName: string;
@@ -24,7 +24,7 @@ export class NgTransitionsDirective implements OnInit, OnDestroy {
       this.leaveAnimationDelay = null;
       this.enterDuration = null;
       this.leaveDuration = null;
-      this.indexPositionInList = null;
+      this.transitionIndex = null;
       this.appendTo = null;
     }
 
@@ -59,8 +59,8 @@ export class NgTransitionsDirective implements OnInit, OnDestroy {
       if (!el || !this.parent) {
         return;
       }
-      if (this.indexPositionInList !== null) {
-        this.parent.insertBefore(el, this.parent.children[this.indexPositionInList]);
+      if (this.transitionIndex !== null) {
+        this.parent.insertBefore(el, this.parent.children[this.transitionIndex]);
       } else {
         this.parent.appendChild(el);
       }

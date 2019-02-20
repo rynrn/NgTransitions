@@ -2,14 +2,14 @@ import { ElementRef, OnInit, OnDestroy } from '@angular/core';
 export declare class NgTransitionsDirective implements OnInit, OnDestroy {
     el: ElementRef;
     NgTransition: any;
-    indexPositionInList: number;
+    transitionIndex: number;
     private parent;
     private enterAnimationName;
-    private leavAnimationName;
+    private leaveAnimationName;
     private enterAnimationDelay;
-    private leavAnimationDelay;
+    private leaveAnimationDelay;
     private enterDuration;
-    private leavDuration;
+    private leaveDuration;
     private appendTo;
     constructor(el: ElementRef);
     ngOnInit(): void;

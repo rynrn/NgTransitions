@@ -42,7 +42,7 @@ this.options = {
 
 <div [NgTransition]="optionsItems"
      *ngFor="let item of items; let i = index;"
-     [indexPositionInList]="i"></div>
+     [transitionIndex]="i"></div>
 ```
 
 #### Single element - transition is done when adding and removing single element
@@ -59,5 +59,5 @@ this.options = {
 
 <div [NgTransition]="optionsItems"
      *ngFor="let item of items; let i = index;"
-     [indexPositionInList]="i"></div>
+     [transitionIndex]="i"></div>
 ```
