@@ -11,7 +11,7 @@ export interface ITransitionOptions {
 }
 export declare class NgTransitionsDirective implements OnInit, OnDestroy {
     el: ElementRef;
-    NgTransition: any;
+    NgTransition: ITransitionOptions;
     transitionIndex: number;
     private parent;
     private enterAnimationName;

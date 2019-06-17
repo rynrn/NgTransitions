@@ -15,7 +15,7 @@ export interface ITransitionOptions {
   selector: '[NgTransition]'
 })
 export class NgTransitionsDirective implements OnInit, OnDestroy {
-    @Input() NgTransition: any;
+    @Input() NgTransition: ITransitionOptions;
     @Input() transitionIndex: number;
 
     private parent: any;
