@@ -12,15 +12,15 @@ make the life easier to add transitions when you add or remove element from DOM.
 
 #### Add directive to appication
 ```
-import { NgTransitionsDirective } from 'ng-transitions';
+import { NgTransitionsModule } from 'ng-transitions';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NgTransitionsDirective
+    AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgTransitionsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,4 @@
-import { NgModule, Directive, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Directive, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
 
 export interface ITransitionOptions {
   enterAnimationName: string;
@@ -98,9 +97,3 @@ export class NgTransitionsDirective implements OnInit, OnDestroy {
     }
 }
 
-@NgModule({
-  imports: [CommonModule],
-  exports: [NgTransitionsDirective],
-  declarations: [NgTransitionsDirective]
-})
-export class NgTransitionsModule { }
