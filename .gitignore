@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/ng-transitions
 
 # dependencies
 /node_modules
