@@ -1,16 +1,22 @@
 # NgTransitions
 
 ## Quickstart
-`npm i --save ng-transitions`
+
+`npm i ng-transitions`
 
 ### Overview
-The ngTransition is a directive that can help you with transitions and animations in angular 2,4,5,6.
+
+The ngTransition is a directive that can help you with transitions about *ngIf & *ngFor with CSS animations in angular.
 make the life easier to add transitions when you add or remove element from DOM. this development was inspired by react-transition-group.
 
+[Demo](https://ng-transitions-demo.stackblitz.io/)
+
 #### Animations
+
 **IMPORTANT** the directive useing animation name that you need to add, you can use **[animate.css](https://daneden.github.io/animate.css)** or any css animation.
 
 #### Add directive to appication
+
 ```
 import { NgTransitionsModule } from 'ng-transitions';
 
@@ -29,6 +35,7 @@ export class AppModule { }
 ```
 
 #### List of items - transition is done when adding and removing items from list
+
 ```
 this.options = {
   appendTo: 'app-root',
@@ -46,6 +53,7 @@ this.options = {
 ```
 
 #### Single element - transition is done when adding and removing single element
+
 ```
 this.options = {
   appendTo: 'app-root',
