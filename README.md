@@ -71,7 +71,6 @@ this.options = {
 ```
 
 ## License
----
 
 (The MIT License)
 
