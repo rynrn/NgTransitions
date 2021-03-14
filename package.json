@@ -1,16 +1,20 @@
 {
   "name": "ng-transitions",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "homepage": "https://github.com/rynrn/NgTransitions",
   "repository": "https://github.com/rynrn/NgTransitions",
   "$schema": "./package.schema.json",
   "scripts": {
-    "build": "ng-packagr",
     "lint": "ng lint",
+    "build": "tsc --sourceMap",
     "verify": "npm run lint && npm run test && npm run build",
-    "deploy": "npm run build && cd dist && npm publish"
+    "clean": "rimraf ./dist",
+    "copy:json": "cp package.json dist/package.json",
+    "deploy": "npm run clean && npm run build && npm run copy:json && cd dist && npm publish"
   },
-  "dependencies": {},
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "peerDependencies": {
     "@angular/core": "^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0",
     "@angular/common": "^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0"
@@ -19,11 +23,12 @@
     "@angular-devkit/build-angular": "~0.1100.1",
     "@angular-devkit/build-ng-packagr": "0.1002.0",
     "@angular/cli": "~11.0.0",
+    "@angular/common": "^11.2.5",
     "@angular/compiler": "~11.0.0",
     "@angular/compiler-cli": "~11.0.0",
     "@angular/language-service": "^7.1.0",
-    "@types/jasminewd2": "~2.0.3",
     "@types/jasmine": "~3.6.0",
+    "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "animate.css": "^3.6.1",
     "codelyzer": "^6.0.0",
